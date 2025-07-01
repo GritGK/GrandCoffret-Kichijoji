@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グランコフレ吉祥寺本町 - Grand Coffret Kichijoji Honcho</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Montserrat:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: #b38b4d; /* Adjusted Gold for light background */
+            --card-bg-color: #ffffff;
+            --section-bg-color: #f8f9fa; /* Light grey for alternate sections */
+            --header-text-light: #ffffff;
+            --header-text-dark: #333333;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0,0,0,0.3);
+            color: var(--header-text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        
+        header.scrolled {
+            background: var(--bg-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        header.scrolled .logo {
+            color: var(--primary-color);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--header-text-light);
+            transition: color 0.3s;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--header-text-light);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        header.scrolled .nav-links a {
+            color: var(--header-text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-image {
+            width: 80%; /* Adjust as needed */
+            max-width: 800px; /* Max width for the image */
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 60px;
+            font-weight: 300;
+            color: #6c757d;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        
+        #gallery .grid {
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        #gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        #gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        #outline table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #outline th, #outline td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            text-align: left;
+        }
+
+        #outline th {
+            background-color: var(--section-bg-color);
+            width: 30%;
+        }
+
+        .room-type {
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+        }
+
+        .room-type h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .room-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .room-gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .room-gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .location-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        .location-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .location-text {
+            flex: 1;
+        }
+        .location-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .location-img {
+            flex: 1;
+            max-width: 50%;
+        }
+        .location-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .access-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            align-items: center;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .access-text {
+            flex: 1;
+        }
+        .access-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .access-img {
+            flex: 1;
+            max-width: 50%;
+        }
+        .access-img img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .access-times-container {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: var(--section-bg-color);
+            border-radius: 8px;
+        }
+        .access-times-container h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .access-times-container table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        .access-times-container th, .access-times-container td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .access-times-container th {
+            background: #e9ecef;
+        }
+        .access-times-container .station {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .access-route-maps img {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        footer {
+            background: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .nav-links { display: none; }
+            .location-item, .location-item:nth-child(even), .access-item {
+                flex-direction: column;
+            }
+            .location-img, .access-img {
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <nav class="container">
+            <div class="logo">Grand Coffret</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#access">Access</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                
+                <li><a href="#outline">Outline</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="hero" style="background-image: url('images/hero-bg.jpg');">
+        <div class="hero-content">
+            <h1>グランコフレ吉祥寺本町</h1>
+            <p>吉祥寺の洗練と、静穏なる暮らしの調和。</p>
+            <img src="images/hero-bg.jpg.jpg" alt="グランコフレ吉祥寺本町" class="hero-image">
+        </div>
+    </section>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About</h2>
+                <p class="section-subtitle">物件の魅力</p>
+                <div class="grid">
+                    <div class="card">
+                        <h3>デザイン & コンセプト</h3>
+                        <p>都心の喧騒から一歩離れた、落ち着きのある住環境。モダンかつ洗練されたデザインは、住まう人のステータスを象徴します。上質な素材と計算された空間設計が、日々の暮らしに安らぎと豊かさをもたらします。</p>
+                    </div>
+                    <div class="card">
+                        <h3>最高のロケーション</h3>
+                        <p>人気の街「吉祥寺」が生活の舞台。駅周辺の活気ある商店街、緑豊かな井の頭恩賜公園、文化的な施設がすべて徒歩圏内に。都心へのアクセスも軽快で、オンもオフも充実した毎日を送れます。</p>
+                    </div>
+                    <div class="card">
+                        <h3>充実の設備</h3>
+                        <p>オートロック、防犯カメラ、宅配ボックスはもちろん、全室に高速インターネット回線を完備。快適で安全な都市生活をサポートする、先進の設備を整えています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="location" style="background: var(--section-bg-color);">
+            <div class="container">
+                <h2 class="section-title">Location</h2>
+                <p class="section-subtitle">「住みたい街」として常に名を馳せる吉祥寺。その魅力を日常に。</p>
+                <div class="location-item">
+                    <div class="location-text">
+                        <h3>多彩な表情を持つ商業エリア</h3>
+                        <p>駅直結の「アトレ」や「キラリナ京王吉祥寺」、老舗の「東急百貨店」などの大型商業施設が集積。一方で、昔ながらの「サンロード商店街」や個性的な店が並ぶ「ダイヤ街」など、新旧が融合した活気ある街並みが広がります。日々の暮らしを豊かに彩る、すべてが揃うロケーションです。</p>
+                    </div>
+                    <div class="location-img">
+                        <img src="images/location-shopping.jpg.jpg" alt="活気ある吉祥寺の商店街">
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-text">
+                        <h3>心安らぐ、武蔵野の自然</h3>
+                        <p>都内有数の広さと美しさを誇る「井の頭恩賜公園」が、暮らしの庭に。四季折々の自然が織りなす風景は、日々の喧騒を忘れさせてくれます。池でのボート遊びや、園内の動物園、カフェでのんびりとした時間を過ごすなど、豊かな自然に癒される贅沢な日常が待っています。</p>
+                    </div>
+                    <div class="location-img">
+                        <img src="images/location-park.jpg.jpg" alt="穏やかな井の頭公園の池">
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-text">
+                        <h3>感性を刺激する文化の薫り</h3>
+                        <p>アート、音楽、演劇。吉祥寺は多様な文化が息づく街です。「吉祥寺シアター」での観劇や、個性的なミニシアターでの映画鑑賞、街角のギャラリー巡りなど、知的好奇心を満たすスポットが豊富。創造性豊かなこの街で、新しい発見と出会う日々が始まります。</p>
+                    </div>
+                    <div class="location-img">
+                        <img src="images/location-cafe.jpg.jpg" alt="おしゃれなカフェの店内">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="access">
+            <div class="container">
+                <h2 class="section-title">Access</h2>
+                <p class="section-subtitle">都心を自在に駆け巡る、スピーディ＆ダイレクトアクセス。</p>
+                <div class="access-item">
+                    <div class="access-img">
+                        <img src="images/access-train-figure.png.png" alt="電車と路線図のイメージ">
+                    </div>
+                    <div class="access-text">
+                        <h3>2路線利用で、主要駅へ直結。</h3>
+                        <p>JR中央線・総武線と京王井の頭線が交差する「吉祥寺」駅。新宿、渋谷、東京といった主要ターミナルへ乗り換えなしでアクセス可能。ビジネスからプライベートまで、あらゆるシーンで都市の利便性を享受できます。</p>
+                    </div>
+                </div>
+                
+                <div class="access-times-container">
+                    <h3>主要駅への所要時間</h3>
+                    <table>
+                        <tr>
+                            <th>目的地</th>
+                            <th>所要時間</th>
+                            <th>利用路線</th>
+                        </tr>
+                        <tr>
+                            <td class="station">新宿</td>
+                            <td>約15分</td>
+                            <td>JR中央線快速</td>
+                        </tr>
+                        <tr>
+                            <td class="station">渋谷</td>
+                            <td>約17分</td>
+                            <td>京王井の頭線急行</td>
+                        </tr>
+                        <tr>
+                            <td class="station">東京</td>
+                            <td>約30分</td>
+                            <td>JR中央線快速</td>
+                        </tr>
+                         <tr>
+                            <td class="station">大手町</td>
+                            <td>約31分</td>
+                            <td>JR中央線快速→東京メトロ丸ノ内線</td>
+                        </tr>
+                    </table>
+                    <small>※所要時間は日中平常時のものであり、時間帯により異なります。乗り換え、待ち時間は含まれません。</small>
+                    <div class="access-route-maps">
+                        <img src="images/access-route-chuo.png.png" alt="中央線路線図">
+                        <img src="images/access-route-tozai.png.png" alt="東西線路線図">
+                    </div>
+                </div>
+
+                 
+            </div>
+        </section>
+
+        <section id="gallery" style="background: var(--section-bg-color);">
+            <div class="container">
+                <h2 class="section-title">Gallery</h2>
+                <p class="section-subtitle">洗練された共用空間</p>
+                <div class="grid">
+                    <img src="images/gallery-1.jpg.jpg" alt="ギャラリー写真1">
+                    <img src="images/gallery-2.jpg.jpg" alt="ギャラリー写真2">
+                    <img src="images/gallery-3.jpg.jpg" alt="ギャラリー写真3">
+                </div>
+            </div>
+        </section>
+
+        <section id="rooms">
+            <div class="container">
+                <h2 class="section-title">Rooms</h2>
+                <p class="section-subtitle">多様なライフスタイルに応えるルームプラン</p>
+
+                <div class="room-type">
+                    <h3>1K Type</h3>
+                    <p><strong>専有面積:</strong> 25.5㎡<br>
+                    機能性と快適性を両立した、ミニマルで洗練された空間。明るい採光と効率的なレイアウトが、心地よいシングルライフを演出します。</p>
+                    <div class="room-gallery">
+                        <img src="images/1K写真/1.jpg" alt="1K 居室">
+                        <img src="images/1K写真/2.jpg" alt="1K キッチン">
+                        <img src="images/1K写真/3.jpg" alt="1K バスルーム">
+                        <img src="images/1K写真/4.jpg" alt="1K 収納">
+                    </div>
+                </div>
+
+                <div class="room-type">
+                    <h3>1LDK Type</h3>
+                    <p><strong>専有面積:</strong> 40.2㎡<br>
+                    ゆとりのあるリビング・ダイニングが特徴。上質なプライベートタイムを過ごすための、ワンランク上の居住空間です。</p>
+                    <div class="room-gallery">
+                        <img src="images/1LDK写真/1.jpg" alt="1LDK リビング">
+                        <img src="images/1LDK写真/2.jpg" alt="1LDK キッチン">
+                        <img src="images/1LDK写真/3.jpg" alt="1LDK バスルーム">
+                        <img src="images/1LDK写真/4.jpg" alt="1LDK 収納">
+                    </div>
+                </div>
+
+                <div class="room-type">
+                    <h3>2LDK Type</h3>
+                    <p><strong>専有面積:</strong> 56.0㎡<br>
+                    最上階に位置する、開放感あふれるプレミアム住戸。広々としたリビングと独立したベッドルームが、ご家族やカップルに最適な、ゆとりある暮らしを実現します。</p>
+                    <div class="room-gallery">
+                        <img src="images/2LDK写真/１.jpg" alt="2LDK リビング">
+                        <img src="images/2LDK写真/２.jpg" alt="2LDK キッチン">
+                        <img src="images/2LDK写真/３.jpg" alt="2LDK バスルーム">
+                        <img src="images/2LDK写真/４.jpg" alt="2LDK 洋室">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        
+
+        <section id="outline">
+            <div class="container">
+                <h2 class="section-title">Outline</h2>
+                <p class="section-subtitle">物件概要</p>
+                <table>
+                    <tr><th>所在地</th><td>東京都武蔵野市吉祥寺本町４丁目3-16</td></tr>
+                    <tr><th>交通</th><td>JR中央・総武線 / 京王井の頭線「吉祥寺」駅 徒歩12分</td></tr>
+                    <tr><th>構造</th><td>鉄筋コンクリート造 地上5階建</td></tr>
+                    <tr><th>築年月</th><td>2024年12月</td></tr>
+                    <tr><th>総戸数</th><td>14戸</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="contact" style="background: var(--section-bg-color);">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title">Contact</h2>
+                <p>内覧のご希望、資料請求、その他お問い合わせは下記までご連絡ください。</p>
+                <p style="font-size: 1.5rem; color: var(--primary-color); font-weight: bold;">Email: ezypt1986@gmail.com</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Grand Coffret Kichijoji Honcho. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
