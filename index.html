@@ -92,7 +92,8 @@
 
         .hero {
             height: 100vh;
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
             display: flex;
             align-items: center;
@@ -128,15 +129,6 @@
             font-size: 1.5rem;
             font-weight: 300;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-image {
-            width: 80%; /* Adjust as needed */
-            max-width: 800px; /* Max width for the image */
-            height: auto;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         section {
@@ -247,6 +239,48 @@
 
         .room-gallery img:hover {
             transform: scale(1.05);
+        }
+        
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        #gallery img, .room-gallery img {
+            cursor: pointer;
+        }
+
+        .madori-img {
+            object-fit: contain !important;
+            background-color: #f8f9fa;
         }
         
         .location-item {
@@ -385,11 +419,10 @@
         </nav>
     </header>
 
-    <section class="hero" id="hero" style="background-image: url('images/hero-bg.jpg');">
+    <section class="hero" id="hero" style="background-image: url('images/hero-bg.jpg.jpg');">
         <div class="hero-content">
             <h1>グランコフレ吉祥寺本町</h1>
             <p>吉祥寺の洗練と、静穏なる暮らしの調和。</p>
-            <img src="images/hero-bg.jpg.jpg" alt="グランコフレ吉祥寺本町" class="hero-image">
         </div>
     </section>
 
@@ -409,7 +442,7 @@
                     </div>
                     <div class="card">
                         <h3>充実の設備</h3>
-                        <p>オートロック、防犯カメラ、宅配ボックスはもちろん、全室に高速インターネット回線を完備。快適で安全な都市生活をサポートする、先進の設備を整えています。</p>
+                        <p>オートロック、防犯カメラ、宅配ボックスはもちろん、全室に高速インターネット回線を完備。敷地内には専用のゴミ保管庫を設置。さらに、駐輪場と電動マイクロモビリティのシェアリングサービス「Luup」のポートを設置し、日々の快適な移動をサポートします。</p>
                     </div>
                 </div>
             </div>
@@ -525,6 +558,7 @@
                     <p><strong>専有面積:</strong> 25.5㎡<br>
                     機能性と快適性を両立した、ミニマルで洗練された空間。明るい採光と効率的なレイアウトが、心地よいシングルライフを演出します。</p>
                     <div class="room-gallery">
+                        <img src="images/1K写真/間取り図.jpg" alt="1K 間取り図" class="madori-img">
                         <img src="images/1K写真/1.jpg" alt="1K 居室">
                         <img src="images/1K写真/2.jpg" alt="1K キッチン">
                         <img src="images/1K写真/3.jpg" alt="1K バスルーム">
@@ -537,6 +571,7 @@
                     <p><strong>専有面積:</strong> 40.2㎡<br>
                     ゆとりのあるリビング・ダイニングが特徴。上質なプライベートタイムを過ごすための、ワンランク上の居住空間です。</p>
                     <div class="room-gallery">
+                        <img src="images/1LDK写真/間取り図.jpg" alt="1LDK 間取り図">
                         <img src="images/1LDK写真/1.jpg" alt="1LDK リビング">
                         <img src="images/1LDK写真/2.jpg" alt="1LDK キッチン">
                         <img src="images/1LDK写真/3.jpg" alt="1LDK バスルーム">
@@ -549,6 +584,7 @@
                     <p><strong>専有面積:</strong> 56.0㎡<br>
                     最上階に位置する、開放感あふれるプレミアム住戸。広々としたリビングと独立したベッドルームが、ご家族やカップルに最適な、ゆとりある暮らしを実現します。</p>
                     <div class="room-gallery">
+                        <img src="images/2LDK写真/間取り図.jpg" alt="2LDK 間取り図" class="madori-img">
                         <img src="images/2LDK写真/１.jpg" alt="2LDK リビング">
                         <img src="images/2LDK写真/２.jpg" alt="2LDK キッチン">
                         <img src="images/2LDK写真/３.jpg" alt="2LDK バスルーム">
@@ -571,6 +607,9 @@
                     <tr><th>構造</th><td>鉄筋コンクリート造 地上5階建</td></tr>
                     <tr><th>築年月</th><td>2024年12月</td></tr>
                     <tr><th>総戸数</th><td>14戸</td></tr>
+                    <tr><th>所有者</th><td>合同会社Grit</td></tr>
+                    <tr><th>管理会社</th><td><a href="https://www.homes.co.jp/realtor/mid-154971hB6S8hO30Ojs/" target="_blank" rel="noopener noreferrer">Mugen Home株式会社</a></td></tr>
+                    <tr><th>備考</th><td>ペット飼育相談可（小型犬もしくは猫1匹まで）</td></tr>
                 </table>
             </div>
         </section>
@@ -578,7 +617,7 @@
         <section id="contact" style="background: var(--section-bg-color);">
             <div class="container" style="text-align: center;">
                 <h2 class="section-title">Contact</h2>
-                <p>内覧のご希望、資料請求、その他お問い合わせは下記までご連絡ください。</p>
+                <p>内覧のご希望、資料請求、その他お問い合わせは管理会社の<a href="https://www.homes.co.jp/realtor/mid-154971hB6S8hO30Ojs/" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color);">Mugen Home株式会社</a>、<br>または下記メールアドレスまでご連絡ください。</p>
                 <p style="font-size: 1.5rem; color: var(--primary-color); font-weight: bold;">Email: ezypt1986@gmail.com</p>
             </div>
         </section>
@@ -590,6 +629,11 @@
         </div>
     </footer>
     
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
     <script>
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
@@ -608,6 +652,27 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        document.querySelectorAll('#gallery img, .room-gallery img').forEach(image => {
+            image.addEventListener('click', e => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = e.target.src;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', e => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
         });
     </script>
 
